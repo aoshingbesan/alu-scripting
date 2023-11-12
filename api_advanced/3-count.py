@@ -1,5 +1,4 @@
-#!/usr/bin/python3
-"""recursive function that queries the Reddit API"""
+ve function that queries the Reddit API"""
 
 import json
 import requests
@@ -48,4 +47,4 @@ def count_words(subreddit, word_list, after='', hot_list=[]):
                 if (hot_list[i] > 0) and i not in save:
                     print("{}: {}".format(word_list[i].lower(), hot_list[i]))
         else:
-            count_words(subreddit, word_list, after, hot
+            count_words(subreddit, word_list, after, hot_

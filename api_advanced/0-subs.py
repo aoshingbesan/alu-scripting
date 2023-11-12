@@ -1,27 +1,21 @@
 #!/usr/bin/python3
-"""
-defines the main function to get
-the sub count from the reddit
-api
-"""
-import requests
-import sys
+"""A function that queries the Reddit API and
+ returns the number of subscribers (all subscribers)"""
 
 
 def number_of_subscribers(subreddit):
     """
-    Sends a query to the reddit api to get the nhmber of subscribers
-    for a particular subreddit
+    queries the Reddit API
+    returns the number of subscribers for a given reddit
     """
-    if subreddit is None or not isinstance(subreddit, str):
-        return (0)
-    endpoint = 'https://www.reddit.com'
-    headers = {'user-agent': 'Testapi/1.0 by aoshingbesan'}
-    info = requests.get('{}/r/{}/about.json'.format(
-        endpoint,
-        subreddit), headers=headers, allow_redirects=False)
-    if info.status_code == 200:
-        data_info = info.json()
-        return (data_info.get('data').get('subscribers'))
-    else:
-        return (0)
+    import json
+    import requests
+    subreddit_URL = 'https://www.reddit.com/r/{}/about/.json'.format(
+        subreddit)
+    subreddit_info = requests.get(subreddit_URL,
+                                  headers={"user-agent": "user"},
+                                  allow_redirects=False).json()
+    if "data" not in subreddit_info:
+        return 0
+    subscribers = subreddit_info.get("data").get("subscribers")
+    return subscribers
